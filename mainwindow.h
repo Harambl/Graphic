@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "paint_scene.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,5 +20,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    paint_scene *scene;
 };
 #endif // MAINWINDOW_H
