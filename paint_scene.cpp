@@ -1,8 +1,9 @@
 #include "paint_scene.h"
 
 paint_scene::paint_scene(QWidget *parent): QWidget{parent} {
-    Image = QImage(size(), QImage::Format_RGB32);
+    Image = QImage(1310, 830, QImage::Format_RGB32);
     Image.fill(Qt::white);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void paint_scene::setImage(const QImage& image){
@@ -14,6 +15,9 @@ const QImage& paint_scene::getImage() const{
     return Image;
 }
 
+void paint_scene::setTool(Tool* tool){
+    currentTool = tool;
+}
 void paint_scene::clear_scene(){
     Image.fill(Qt::white);
     update();
@@ -22,6 +26,9 @@ void paint_scene::clear_scene(){
 void paint_scene::executeCom(Command *com){
     com->execute();
     UndoStack.push_back(com);
+    if (UndoStack.size() > MaxDo) {
+        delete UndoStack.takeFirst();
+    }
     RedoStack.clear();
 }
 
@@ -47,4 +54,22 @@ void paint_scene::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.drawImage(event->rect(), Image, event->rect());
+}
+
+void paint_scene::mousePressEvent(QMouseEvent* event) {
+    if (currentTool)
+        currentTool->mousePressEvent(event, this);
+    update();
+}
+
+void paint_scene::mouseMoveEvent(QMouseEvent* event) {
+    if (currentTool)
+        currentTool->mouseMoveEvent(event, this);
+    update();
+}
+
+void paint_scene::mouseReleaseEvent(QMouseEvent* event) {
+    if (currentTool)
+        currentTool->mouseReleaseEvent(event, this);
+    update();
 }

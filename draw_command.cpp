@@ -1,6 +1,6 @@
 #include "draw_command.h"
 
-Draw_Command::Draw_Command(QImage *image, QPoint& start, QPoint& end, QPen& pen): dImage(image), Start(start), End(end), Pen(pen), Backup(image->copy()) {}
+Draw_Command::Draw_Command(QImage *image, QPoint& start, QPoint& end, QPen& pen, QPen& upen): dImage(image), Start(start), End(end), Pen(pen), UPen(upen), Backup(image->copy()) {}
 
 void Draw_Command::execute(){
     QPainter painter(dImage);
@@ -10,4 +10,7 @@ void Draw_Command::execute(){
 
 void Draw_Command::undo(){
     *dImage = Backup;
+    QPainter painter(dImage);
+    painter.setPen(UPen);
+    painter.drawLine(Start, End);
 }

@@ -2,3 +2,5 @@
 
 Tool::Tool() {}
 
+Tool::~Tool() = default;
+

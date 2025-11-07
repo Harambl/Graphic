@@ -15,11 +15,22 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+
+    void onUndo();
+    void onRedo();
+    void onToolChanged(QAction* action);
+
 private:
+
     Ui::MainWindow *ui;
-    paint_scene *scene;
+    paint_scene* scene;
+    Tool* brush;
+
+    QActionGroup* toolGroup;
 };
 #endif // MAINWINDOW_H
