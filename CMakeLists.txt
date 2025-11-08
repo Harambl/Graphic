@@ -39,6 +39,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         text_command.h text_command.cpp
         tool.h tool.cpp
         tbrush.h tbrush.cpp
+        timage.h timage.cpp
+        ttext.h ttext.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Graphica APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

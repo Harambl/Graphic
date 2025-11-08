@@ -54,6 +54,23 @@ void paint_scene::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.drawImage(event->rect(), Image, event->rect());
+
+    if (hasTempPath){
+        painter.setPen(tempPen);
+        painter.drawPath(tempPath);
+    }
+}
+
+void paint_scene::setTempPath(const QPainterPath& path, const QPen& pen) {
+    tempPath = path;
+    tempPen = pen;
+    hasTempPath = true;
+    update();
+}
+
+void paint_scene::clearTempPath() {
+    hasTempPath = false;
+    update();
 }
 
 void paint_scene::mousePressEvent(QMouseEvent* event) {

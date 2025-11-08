@@ -1,5 +1,6 @@
 #ifndef PAINT_SCENE_H
 #define PAINT_SCENE_H
+#pragma once
 
 #include <QObject>
 #include <QWidget>
@@ -9,6 +10,7 @@
 #include <QColor>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPainterPath>
 #include "command.h"
 #include "tool.h"
 
@@ -28,6 +30,10 @@ public:
     void executeCom(Command *com);
     void undo();
     void redo();
+
+    void setTempPath(const QPainterPath& path, const QPen& pen);
+    void clearTempPath();
+
 protected:
 
     void paintEvent(QPaintEvent* event) override;
@@ -35,10 +41,7 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
 
-
 private:
-
-    //void paintEvent(QPaintEvent *event) override;
 
     QList<Command*> UndoStack;
     QList<Command*> RedoStack;
@@ -46,6 +49,10 @@ private:
 
     QImage Image;
     Tool* currentTool = nullptr;
+
+    QPainterPath tempPath;
+    QPen tempPen;
+    bool hasTempPath = false;
 
 signals:
 

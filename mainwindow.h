@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include "paint_scene.h"
@@ -30,7 +31,8 @@ private:
     Ui::MainWindow *ui;
     paint_scene* scene;
     Tool* brush;
-
+    Tool* image;
+    Tool* text;
     QActionGroup* toolGroup;
 };
 #endif // MAINWINDOW_H

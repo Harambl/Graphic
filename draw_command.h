@@ -1,16 +1,18 @@
 #ifndef DRAW_COMMAND_H
 #define DRAW_COMMAND_H
+#pragma once
 
 #include "command.h"
 #include <QPoint>
 #include <QImage>
 #include <QPen>
 #include <QPainter>
+#include <QPainterPath>
 
 class Draw_Command: public Command
 {
 public:
-    Draw_Command(QImage *image, QPoint& start, QPoint& end, QPen& pen, QPen& Upen);
+    Draw_Command(QImage *image, QPainterPath& Path, QPen& pen);
 
     void undo() override;
     void execute() override;
@@ -19,8 +21,7 @@ private:
 
     QImage *dImage;
     QPen Pen;
-    QPen UPen;
-    QPoint Start, End;
+    QPainterPath Path;
     QImage Backup;
 
 };
