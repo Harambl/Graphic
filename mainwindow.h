@@ -31,6 +31,7 @@ private:
     Ui::MainWindow *ui;
     paint_scene* scene;
     Tool* brush;
+    Tool* eraser;
     Tool* image;
     Tool* text;
     QActionGroup* toolGroup;

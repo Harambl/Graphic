@@ -26,6 +26,7 @@ public:
 
     const QImage& getImage() const;
     void setImage(const QImage& image);
+    void saveImage();
 
     void executeCom(Command *com);
     void undo();

@@ -32,10 +32,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>1321</width>
-      <height>791</height>
+      <x>0</x>
+      <y>10</y>
+      <width>1341</width>
+      <height>801</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="PaintLayout">

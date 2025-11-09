@@ -1,7 +1,7 @@
 #include "paint_scene.h"
 
 paint_scene::paint_scene(QWidget *parent): QWidget{parent} {
-    Image = QImage(1310, 830, QImage::Format_RGB32);
+    Image = QImage(1343, 850, QImage::Format_RGB32);
     Image.fill(Qt::white);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
