@@ -14,6 +14,7 @@
 #include "command.h"
 #include "tool.h"
 
+
 class paint_scene : public QWidget
 {
     Q_OBJECT
@@ -35,8 +36,6 @@ public:
     void setTempPath(const QPainterPath& path, const QPen& pen);
     void clearTempPath();
 
-protected:
-
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -49,6 +48,9 @@ private:
     static const int MaxDo = 50;
 
     QImage Image;
+    int Image_count = 0;
+    QString Image_name = "image";
+
     Tool* currentTool = nullptr;
 
     QPainterPath tempPath;

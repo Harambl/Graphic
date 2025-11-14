@@ -25,6 +25,8 @@ private slots:
     void onUndo();
     void onRedo();
     void onToolChanged(QAction* action);
+    void onSave();
+    void onClear();
 
 private:
 

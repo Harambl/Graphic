@@ -84,10 +84,29 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
         }
     });
 
+
     toolbar->addWidget(new QLabel("Size:"));
     toolbar->addWidget(brushSizeSlider);
     toolbar->addWidget(new QLabel("Color:"));
     toolbar->addWidget(colorButton);
+
+    QToolButton* saveButton = new QToolButton();
+    saveButton->setText("Save");
+
+    QToolButton* clearButton = new QToolButton();
+    clearButton->setText("Clear");
+
+    connect(saveButton, &QToolButton::clicked, this, [this](){
+        scene->saveImage();
+    });
+
+    connect(clearButton, &QToolButton::clicked, this, [this](){
+        scene->clear_scene();
+    });
+
+    toolbar->addWidget(saveButton);
+
+    toolbar->addWidget(clearButton);
 
 }
 
@@ -97,6 +116,14 @@ void MainWindow::onUndo() {
 
 void MainWindow::onRedo() {
     scene->redo();
+}
+
+void MainWindow::onSave() {
+    scene->saveImage();
+}
+
+void MainWindow::onClear() {
+    scene->clear_scene();
 }
 
 void MainWindow::onToolChanged(QAction* action) {

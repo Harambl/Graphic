@@ -1,5 +1,6 @@
 #include "paint_scene.h"
 
+
 paint_scene::paint_scene(QWidget *parent): QWidget{parent} {
     Image = QImage(1343, 850, QImage::Format_RGB32);
     Image.fill(Qt::white);
@@ -15,11 +16,31 @@ const QImage& paint_scene::getImage() const{
     return Image;
 }
 
+void paint_scene::saveImage(){
+    QString fnCount = QString::number(Image_count);
+    QString fnName = Image_name + fnCount + ".png";
+    Image.save(fnName);
+    Image_count += 1;
+}
+
 void paint_scene::setTool(Tool* tool){
     currentTool = tool;
 }
 void paint_scene::clear_scene(){
     Image.fill(Qt::white);
+
+    for (Command* com : UndoStack) {
+        delete com;
+        }
+
+    UndoStack.clear();
+
+    for (Command* com : RedoStack){
+        delete com;
+        }
+
+    RedoStack.clear();
+
     update();
 }
 
@@ -29,6 +50,11 @@ void paint_scene::executeCom(Command *com){
     if (UndoStack.size() > MaxDo) {
         delete UndoStack.takeFirst();
     }
+
+    for (Command* com : RedoStack){
+        delete com;
+    }
+
     RedoStack.clear();
 }
 
